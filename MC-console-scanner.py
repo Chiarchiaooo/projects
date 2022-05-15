@@ -1,7 +1,6 @@
 from genericpath import exists
 import os,time,sys
-#import timestamp
-from progressbar import progressbar
+
 #summary description
 name = ["errors","warns","shop","disconnects","joins","commands","chat"]
 #scanner filters
@@ -32,12 +31,13 @@ def finish():
     for x in range(len(res)):
         print(f"{name[x]}: {res[x]}")
     print("\n\nOperazione completata")
+    a = input(".")
     sys.exit()
 
 def read(x,file):
-    f = open(file, 'r+', encoding="utf8")
+    f = open(file, 'r',encoding="utf-8",errors='ignore')
     print("L'operazione potrebbe richiedere alcuni minuti...\n\n")
-    for line in progressbar(f.readlines(), redirect_stdout=True):
+    for line in f.readlines():
         line.split('\n')
         for d in range(len(filters)):
             if filters[d] in line:
@@ -101,7 +101,7 @@ def check(x):
             
 
 #main code
-print("IL FILE DEVE ESSERE NELLA STESSA CARTELLA DI reader.py\n")
+print("IL FILE DEVE ESSERE NELLA STESSA CARTELLA\n")
 #txtfile = "latest.txt" #uncomment this for testing, 
 txtfile = input("inserisci il nome del file da leggere: ") 
 os.system("cls")
@@ -111,7 +111,7 @@ if not os.path.exists(txtfile):
 if not os.path.isdir('./output'): #first run setup
     os.mkdir('output')
     os.mkdir(f'{path}{txtfile}')
-    print('setup completato')0
+    print('setup completato')
     dupe = False
     read(x,txtfile)
 else:
