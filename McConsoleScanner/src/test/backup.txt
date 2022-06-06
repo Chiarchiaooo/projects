@@ -1,0 +1,32 @@
+    static <bool> void check(int x) {
+        bool dupe;
+        try {
+            final File d = new File("output");
+            final String filename = "output.log";
+            if (d.exists()) {
+                final File f = new File(d,filename);
+                if (f.createNewFile()) {
+                    System.out.println("Created " + f.getName());
+                } else {
+                    //System.out.println("File '" + f.getName() + "' Already existing");
+                    System.out.println(x);
+                    File fn = new File(d,filename + "-" + x);
+                    if (fn.createNewFile()) {
+                        System.out.println("Created");
+                    }else {
+                        x++;
+                        check(x);
+                    }
+                }
+            }else {
+                d.mkdir();
+                System.out.println("Directory creata");
+                File f = new File(d,filename);
+                f.createNewFile();
+                System.out.println("Created " + f.getName());
+            }
+        }catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
