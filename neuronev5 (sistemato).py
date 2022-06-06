@@ -1,6 +1,5 @@
 import math
 import random
-from typing import Set
 #dataset
 dataset = [
     [1.5,0.5,1],
